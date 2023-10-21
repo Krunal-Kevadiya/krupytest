@@ -1,0 +1,81 @@
+_subdirectory: src
+
+# Configure jinja2 defaults to make syntax highlighters lives easier
+_templates_suffix: .jinja
+_envops:
+  block_end_string: "%}"
+  block_start_string: "{%"
+  comment_end_string: "#}"
+  comment_start_string: "{#"
+  keep_trailing_newline: true
+  variable_end_string: "}}"
+  variable_start_string: "{{"
+
+# This template is just a complement, so we better use a different default answers file
+_answers_file: .krupy-answers.krupytest.yml
+
+# Add --dev dependencies for poetry env
+_tasks:
+  - "{% if python and poetry_local_hooks %}poetry add --dev autoflake pyupgrade black
+    blacken-docs isort flake8 flake8-bugbear pydocstyle[toml] {% if commitizen
+    %}commitizen{% endif %} || true{% else %}true{% endif %}"
+  - pre-commit install -t pre-commit -t commit-msg || true
+
+# Questions
+python:
+  default: true
+  type: bool
+  help: Will your project use Python 3.6 or later?
+
+poetry_local_hooks:
+  default: false
+  type: bool
+  when: "{{ python }}"
+  help: Do you prefer to run local hooks prefixed with `poetry run`?
+
+    In this case, you are supposed to maintain these dependencies locally using `poetry
+    add --dev`. Provides better integration with IDEs and Dependabot.
+
+js:
+  default: true
+  type: bool
+  help: Will you use JavaScript?
+
+terraform:
+  default: false
+  type: bool
+  help: Will you use Terraform?
+
+nix:
+  default: false
+  type: bool
+  help: Will you use Nix?
+
+ansible:
+  default: false
+  type: bool
+  help: Will you use Ansible?
+
+commitizen:
+  default: false
+  type: bool
+  help: Use Commitizen to lint commit messages?
+
+biggest_kbs:
+  default: 1000
+  type: int
+  help: Max file size allowed in this repo? In KiBs. Set to 0 to disable.
+
+main_branches:
+  default: [main, master]
+  type: yaml
+  help:
+    Protected branches where you will not be able to do direct commits. Set to null to
+    disable. Otherwise, it's an array of strings.
+
+github:
+  default: true
+  type: bool
+  help: Create configurations specific to GitHub?
+
+    This includes a workflow to check code, issue and PR templates...

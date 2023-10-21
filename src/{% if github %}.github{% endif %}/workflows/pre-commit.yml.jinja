@@ -1,0 +1,17 @@
+name: pre-commit
+
+on:
+  pull_request:
+  push:
+    branches:
+    {%- for branch in main_branches or ["main", "master"] %}
+      - {{ branch }}
+    {%- endfor %}
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: pre-commit/action@v2.0.0
