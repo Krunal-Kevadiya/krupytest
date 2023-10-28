@@ -1,14 +1,10 @@
 # Changes here will be overwritten by krupy; do NOT edit manually
 _commit: v0.4.2-1-geb45972
 _src_path: .
-ansible: false
+ansible: true
 biggest_kbs: 1000
-commitizen: false
-github: false
-js: false
+github: true
+js: true
 main_branches:
   - main
-nix: false
-poetry_local_hooks: false
-python: false
-terraform: false
+python: true
