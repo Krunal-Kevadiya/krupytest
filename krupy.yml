@@ -23,7 +23,7 @@ _tasks:
 
 # Questions
 python:
-  default: true
+  default: false
   type: bool
   help: Will your project use Python 3.6 or later?
 
@@ -37,7 +37,7 @@ poetry_local_hooks:
     add --dev`. Provides better integration with IDEs and Dependabot.
 
 js:
-  default: true
+  default: false
   type: bool
   help: Will you use JavaScript?
 
@@ -74,7 +74,7 @@ main_branches:
     disable. Otherwise, it's an array of strings.
 
 github:
-  default: true
+  default: false
   type: bool
   help: Create configurations specific to GitHub?
 
